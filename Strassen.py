@@ -20,28 +20,28 @@ def strassen(A, B):
     B22 = B[mid:, mid:]
 
     # Calcular os produtos intermediários de Strassen
-    P1 = strassen(A11, (B12 - B22))
-    P2 = strassen((A11 + A12), B22)
-    P3 = strassen((A21 + A22), B11)
-    P4 = strassen(A22, (B21 - B11))
-    P5 = strassen((A11 + A22), (B11 + B22))
-    P6 = strassen((A12 - A22), (B21 + B22))
-    P7 = strassen((A11 - A21), (B11 + B12))
+    S1 = strassen(A11, (B12 - B22))
+    S2 = strassen((A11 + A12), B22)
+    S3 = strassen((A21 + A22), B11)
+    S4 = strassen(A22, (B21 - B11))
+    S5 = strassen((A11 + A22), (B11 + B22))
+    S6 = strassen((A12 - A22), (B21 + B22))
+    S7 = strassen((A11 - A21), (B11 + B12))
 
     # Combinar os resultados
-    C11 = P5 + P4 - P2 + P6
-    C12 = P1 + P2
-    C21 = P3 + P4
-    C22 = P5 + P1 - P3 - P7
+    P11 = S5 + S4 - S2 + S6
+    P12 = S1 + S2
+    P21 = S3 + S4
+    P22 = S5 + S1 - S3 - S7
 
     # Montar a matriz resultante
-    C = np.zeros((n, n))
-    C[:mid, :mid] = C11
-    C[:mid, mid:] = C12
-    C[mid:, :mid] = C21
-    C[mid:, mid:] = C22
+    P = np.zeros((n, n))
+    P[:mid, :mid] = P11
+    P[:mid, mid:] = P12
+    P[mid:, :mid] = P21
+    P[mid:, mid:] = P22
 
-    return C
+    return P
 
 # Exemplo de uso
 A = np.array([[1, 2, 3, 4],
